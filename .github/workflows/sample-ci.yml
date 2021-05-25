@@ -25,6 +25,7 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
+      - run: npm i
       - run: yarn build
       - run: yarn start 3000
 
