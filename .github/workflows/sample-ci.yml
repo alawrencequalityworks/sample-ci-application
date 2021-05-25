@@ -1,7 +1,13 @@
-name: GitHub Actions Demo
-on: [push]
+name: Sample Application CI Demo
+on:
+  push:
+    branches:
+      - dev
+      - qa
+      - master
+
 jobs:
-  Explore-GitHub-Actions:
+  Info:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -15,3 +21,10 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: yarn build
+      - run: yarn start 3000
+
