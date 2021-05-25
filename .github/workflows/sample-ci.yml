@@ -22,5 +22,5 @@ jobs:
       - name: Check out repository code
         uses: ofindley/webdriverio-v6-qualitycamp-example
       - run: npm install
-      - run: npm test
+      - run: npm run test
 
