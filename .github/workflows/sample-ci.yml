@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: ofindley/webdriverio-v6-qualitycamp-example
+        uses: ofindley/webdriverio-v6-qualitycamp-example@main
       - run: npm install
       - run: npm run test
 
