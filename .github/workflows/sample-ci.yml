@@ -21,7 +21,10 @@ jobs:
     needs: Build
     steps:
       - name: Check out repository code
-        uses: ofindley/webdriverio-v6-qualitycamp-example@main
+        uses: actions/checkout@v2
+          with:
+            repository: 'ofindley/webdriverio-v6-qualitycamp-example'
+            ref: 'main'
       - run: npm install
       - run: npm run test
 
