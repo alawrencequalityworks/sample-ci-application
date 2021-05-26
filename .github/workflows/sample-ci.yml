@@ -23,7 +23,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
         with:
-          repository: 'ofindley/webdriverio-v6-qualitycamp-example'
+          repository: 'ofindley/sample-ci-webdriverio-test'
           ref: 'main'
       - run: npm install
       - run: npm run test
