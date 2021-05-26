@@ -26,6 +26,6 @@ jobs:
           repository: 'ofindley/sample-ci-webdriverio-test'
           ref: 'main'
       - run: npm install
-      - run: curl http://localhost:3000
+      - run: curl http://127.0.0.1:3000
       - run: npm run test
 
