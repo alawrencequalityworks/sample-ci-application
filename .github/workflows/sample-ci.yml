@@ -25,7 +25,8 @@ jobs:
         with:
           repository: 'ofindley/sample-ci-webdriverio-test'
           ref: 'main'
-      - run: npm install
-      - run: curl http://localhost:3000
+          start: npm install
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 200
       - run: npm run test
 
