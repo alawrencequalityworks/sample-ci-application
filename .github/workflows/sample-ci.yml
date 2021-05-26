@@ -15,20 +15,11 @@ jobs:
       - run: npm install
       - run: yarn build
       - run: yarn start 3000 &
-
-  Test:
-    runs-on: ubuntu-latest
-    needs: Build
-    steps:
       - name: Check out test repository code
         uses: actions/checkout@v2
         with:
           repository: 'ofindley/sample-ci-webdriverio-test'
           ref: 'main'
       - run: npm install
-      - name: wait on server to run test
-        uses: actions/checkout@v2
-        with:
-          start: npm run test
-          wait-on: 'http://localhost:3000'
+      - run: npm run test
 
