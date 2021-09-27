@@ -15,8 +15,14 @@ jobs:
       - run: npm install
       - run: yarn build
       - run: yarn start 3000 &
-      - run: npm install -g localtunnel
-      - run: lt --port 3000 &
+      - name: Check out test repository code
+        uses: actions/checkout@v2
+        with:
+          repository: 'ofindley/sample-ci-webdriverio-test'
+          ref: 'main'
+      - run: npm install
+      - run: npm test
+      
 
   Test:
     runs-on: ubuntu-latest
