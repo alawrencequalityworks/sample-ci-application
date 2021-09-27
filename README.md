@@ -3,7 +3,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ![sample-ci workflow](https://github.com/ofindley/sample-ci-application/actions/workflows/sample-ci.yml/badge.svg)
 
 ## Getting Started
-
 First, run the development server:
 
 ```bash
