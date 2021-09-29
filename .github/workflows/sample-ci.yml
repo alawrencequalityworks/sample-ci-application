@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: npm install
+      - run: npm i
       - run: yarn build
       - run: yarn start 3000 &
       - run: sudo apt-get install chromium-browser
@@ -21,6 +21,6 @@ jobs:
         with:
           repository: 'ofindley/sample-ci-webdriverio-test'
           ref: 'main'
-      - run: npm install
+      - run: npm i
       - run: npm test
 
