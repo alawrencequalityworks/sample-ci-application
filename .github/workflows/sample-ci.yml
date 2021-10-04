@@ -8,14 +8,13 @@ on:
 
 jobs:  
   Build:
-    runs-on: ubuntu-latest
+    runs-on: buildkite/puppeteer:latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: npm i
       - run: yarn build
       - run: yarn start 3000 &
-      - run: sudo apt-get install chromium-browser
       - name: Check out test repository code
         uses: actions/checkout@v2
         with:
