@@ -8,18 +8,26 @@ on:
 
 jobs:  
   Build:
-    runs-on: buildkite/puppeteer:latest
+    runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Check out Application code
         uses: actions/checkout@v2
-      - run: npm i
-      - run: yarn build
-      - run: yarn start 3000 &
-      - name: Check out test repository code
+      - name: Install Application dependencies
+        run: npm install
+      - name: Build Application code
+        run: yarn build
+      - name: Start Application
+        run: yarn start 3000 &
+      - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
           repository: 'ofindley/sample-ci-webdriverio-test'
           ref: 'main'
-      - run: npm i
-      - run: npm test
-
+      - name: Install Test dependencies
+        uses: docker://buildkite/puppeteer:latest
+        with:
+            args: npm install
+      - name: Execute Tests
+        uses: docker://buildkite/puppeteer:latest
+        with:
+            args: npm test
