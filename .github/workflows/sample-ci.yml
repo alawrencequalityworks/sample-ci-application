@@ -9,6 +9,9 @@ on:
 jobs:  
   Build:
     runs-on: ubuntu-latest
+    env:
+      baseurl: https://ciexample121.loca.lt
+
     steps:
       - name: Check out Application code
         uses: actions/checkout@v2
@@ -18,6 +21,8 @@ jobs:
         run: yarn build
       - name: Start Application
         run: yarn start 3000 &
+        run: npm install -g localtunnel
+        run: lt --port 3000 --subdomain ciexample121 &
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
