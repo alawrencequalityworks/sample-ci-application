@@ -22,7 +22,14 @@ jobs:
       - name: Start Application
         run: yarn start 3000 &
       - name: Get public url
-        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 &
+        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 &> url.txt&
+      - name: Set baseurl First
+        run: cat url.txt | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*"
+      - name: Set baseurl Second
+        run: echo '::set-output name=BASE_URL::cat url.txt | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*"'
+        id: random-base-url
+      - name: Get baseurl
+        run: echo "The url is ${{ steps.random-base-url.outputs.BASE_URL }}"
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
