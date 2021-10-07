@@ -20,13 +20,15 @@ jobs:
         run: yarn start 3000 &
       - name: Get public url
         run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 &> url.txt&
-      - name: Get url from file
-        id: vars
-        run: echo ::set-output name=url::$(cat url.txt)
-      - name: Test output
-        run: echo ${{ steps.vars.outputs.url }}
-      - name: Print url file
+      - name: Check if file exist
         run: ls
+      - name: Read url.txt
+        id: url
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./url.txt
+      - name: Echo url.txt
+        run: echo "${{ steps.url.outputs.content }}"
       - name: Set baseurl
         run: echo '::set-output name=BASE_URL::$(cat url.txt | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")'
         id: random-base-url
