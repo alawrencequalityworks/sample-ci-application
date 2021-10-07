@@ -20,8 +20,13 @@ jobs:
         run: yarn start 3000 &
       - name: Get public url
         run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 &> url.txt&
+      - name: Get url from file
+        id: vars
+        run: echo ::set-output name=url::$(cat url.txt)
+      - name: Test output
+        run: echo ${{ steps.vars.outputs.url }}
       - name: Print url file
-        run: ls; cat $GITHUB_WORKSPACE/url.txt
+        run: ls
       - name: Set baseurl
         run: echo '::set-output name=BASE_URL::$(cat url.txt | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")'
         id: random-base-url
