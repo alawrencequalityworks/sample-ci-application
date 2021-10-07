@@ -9,9 +9,6 @@ on:
 jobs:  
   Build:
     runs-on: ubuntu-latest
-    env:
-      burl: https://ciexample121.loca.lt
-
     steps:
       - name: Check out Application code
         uses: actions/checkout@v2
