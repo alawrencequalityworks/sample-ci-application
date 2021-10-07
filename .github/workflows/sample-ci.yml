@@ -19,7 +19,7 @@ jobs:
       - name: Start Application
         run: yarn start 3000 &
       - name: Get public url
-        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 &> url.txt&
+        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 > url.txt&
       - name: Check if file exist
         run: ls
       - name: Read url.txt
