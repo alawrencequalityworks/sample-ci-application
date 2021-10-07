@@ -22,6 +22,8 @@ jobs:
         run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 > url.txt&
       - name: Check if file exist
         run: ls
+      - name: Check char length of file
+        run: wc -c url.txt
       - name: Read url.txt
         id: url
         uses: juliangruber/read-file-action@v1
