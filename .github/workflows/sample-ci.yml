@@ -19,7 +19,7 @@ jobs:
       - name: Start Application
         run: yarn start 3000 &
       - name: Get public url
-        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 &> url.txt&; cat url.txt
+        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 &| echo
       - name: Print url file
         run: cat url.txt
       - name: Set baseurl
