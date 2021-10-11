@@ -38,7 +38,7 @@ jobs:
             args: npm install
       - name: Execute Tests
         env:
-          URL: ${{ steps.random-base-url.outputs.BASE_URL }}
+          URL: "${{ steps.random-base-url.outputs.BASE_URL }}"
         uses: docker://buildkite/puppeteer:latest
         with:
             args: npm test
