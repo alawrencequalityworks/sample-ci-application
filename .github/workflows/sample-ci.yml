@@ -26,7 +26,7 @@ jobs:
         run: echo '::set-output name=BASE_URL::$(cat url.txt | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")'
         id: random-base-url
       - name: Get baseurl variable
-        run: echo "${{ steps.random-base-url.outputs.BASE_URL }}"; echo ${{ steps.random-base-url.outputs.BASE_URL }} >> $GITHUB_ENV
+        run: echo "${{ steps.random-base-url.outputs.BASE_URL }}"; ${{ steps.random-base-url.outputs.BASE_URL }} >> $GITHUB_ENV
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
