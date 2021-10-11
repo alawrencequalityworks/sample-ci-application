@@ -19,7 +19,7 @@ jobs:
       - name: Start Application
         run: yarn start 3000 &
       - name: Get public url for Application
-        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")" > url.txt&
+        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*" > url.txt&
       - name: Check if url.txt was created
         run: wc -c url.txt
       - name: Set baseurl variable
