@@ -26,7 +26,7 @@ jobs:
         run: echo '::set-output name=BASE_URL::$(cat url.txt | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")'
         id: random-base-url
       - name: Get baseurl variable
-        run: echo "${{ steps.random-base-url.outputs.BASE_URL }}"
+        run: echo "${{ steps.random-base-url.outputs.BASE_URL }}"; echo "${{ steps.random-base-url.outputs.BASE_URL }}" >> $BASE_URL
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
@@ -38,7 +38,7 @@ jobs:
             args: npm install
       - name: Execute Tests
         env:
-          URL: "${{ steps.random-base-url.outputs.BASE_URL }}"
+          URL: $BASE_URL
         uses: docker://buildkite/puppeteer:latest
         with:
             args: npm test
