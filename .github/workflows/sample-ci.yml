@@ -19,9 +19,13 @@ jobs:
       - name: Start Application
         run: yarn start 3000 &
       - name: Get public url for Application
-        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*"& >> $GITHUB_ENV
-      - name: Check if baseurl var was set
-        run: echo "${{ env.base_url }}" 
+        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")" > url.txt&
+      - name: Check if url.txt was created
+        run: wc -c url.txt
+      - name: Set baseurl variable
+        run: echo "base_url=$(cat url.txt)" >> $GITHUB_ENV
+      - name: Get baseurl variable
+        run: echo "${{ env.base_url }}"
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
