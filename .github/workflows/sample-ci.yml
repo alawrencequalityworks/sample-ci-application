@@ -1,0 +1,43 @@
+name: Sample Application CI Demo
+on:
+  push:
+    branches:
+      - dev
+      - qa
+      - master
+
+jobs:  
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Application code
+        uses: actions/checkout@v2
+      - name: Install Application dependencies
+        run: npm install
+      - name: Build Application code
+        run: yarn build
+      - name: Start Application
+        run: yarn start 3000 &
+      - name: Get public url for Application
+        run: npm i -g localtunnel; lt --port 3000 --subdomain ciexample121 > url.txt&
+      - name: Check if url.txt was created
+        run: wc -c url.txt
+      - name: Set baseurl variable
+        run: echo "base_url=$(cat url.txt | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")" >> $GITHUB_ENV
+      - name: Get baseurl variable
+        run: echo "${{ env.base_url }}"
+      - name: Check out Test Automation code
+        uses: actions/checkout@v2
+        with:
+          repository: 'ofindley/sample-ci-webdriverio-test'
+          ref: 'main'
+      - name: Install Test dependencies
+        uses: docker://buildkite/puppeteer:latest
+        with:
+            args: npm install
+      - name: Execute Tests
+        env:
+          URL: ${{ env.base_url }}
+        uses: docker://buildkite/puppeteer:latest
+        with:
+            args: npm test
