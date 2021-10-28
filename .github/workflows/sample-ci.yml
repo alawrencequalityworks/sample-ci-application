@@ -12,14 +12,13 @@ jobs:
     steps:
       - name: Check out Application code
         uses: actions/checkout@v2
-      - run: sleep 30
       - name: vercel-preview-url
         uses: zentered/vercel-preview-url@v1.0.0
         id: vercel_preview_url
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          vercel_team_id: 'oAkHePtXpAcgag953JIj1qwP'
+          vercel_team_id: 'team_Ohbt6zX5TqMSL5dvSWcnhOWm'
       - name: Get URL
         run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
 
