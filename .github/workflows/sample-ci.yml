@@ -20,10 +20,6 @@ jobs:
         run: yarn start 3001 &
       - name: Get public url for Application
         run: npm i -g localtunnel; lt --port 3001 --subdomain ciexample121 > url.txt &
-      - name: Set baseurl variable
-        run: echo "base_url=$(cat url.txt | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")" >> $GITHUB_ENV
-      - name: Get baseurl variable
-        run: echo "${{ env.base_url }}"
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
@@ -35,7 +31,7 @@ jobs:
             args: npm install
       - name: Execute Tests
         env:
-          URL: ${{ env.base_url }}
+          URL: https://ciexample121.loca.lt/
         uses: docker://buildkite/puppeteer:latest
         with:
             args: npm test
