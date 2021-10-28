@@ -20,9 +20,9 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          vercel_team_id: 'team_Ohbt6zX5TqMSL5dvSWcnhOWm'
-          vercel_project_id: 'prj_zwVXa38hjQb2JtErhJRhJa3fqIdx'
-      - name: Get URL
+          vercel_team_id: ${{ secrets.VERCEL_TEAM_ID }}
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Get Application URL
         run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
       - name: Wait Until Application Deployed
         uses: UnlyEd/github-action-await-vercel@v1.1.0
@@ -48,7 +48,7 @@ jobs:
         uses: docker://buildkite/puppeteer:latest
         with:
             args: npm install
-      - name: Execute Tests
+      - name: Execute Automated Tests
         env:
           URL: ${{ needs.Build.outputs.url }}
         uses: docker://buildkite/puppeteer:latest
