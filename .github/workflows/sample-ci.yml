@@ -24,6 +24,11 @@ jobs:
         run: echo "base_url=$(cat url.txt | egrep -o "(http|https)://[a-zA-Z0-9./?=_%:-]*")" >> $GITHUB_ENV
       - name: Get baseurl variable
         run: echo "${{ env.base_url }}"
+
+  Test:
+    runs-on: ubuntu-latest
+    needs: Build
+    steps:
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
