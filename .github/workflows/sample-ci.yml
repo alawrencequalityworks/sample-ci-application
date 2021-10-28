@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: Build
     steps:
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
