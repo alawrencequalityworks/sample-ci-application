@@ -9,6 +9,8 @@ on:
 jobs:  
   Build:
     runs-on: ubuntu-latest
+    outputs:
+      url: "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
     steps:
       - name: Check out Application code
         uses: actions/checkout@v2
@@ -28,7 +30,7 @@ jobs:
     needs: Build
     steps:
       - name: Get URL
-        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+        run: echo "${{ needs.Build.outputs.url }}"
       - name: Check out Test Automation code
         uses: actions/checkout@v2
         with:
@@ -40,7 +42,7 @@ jobs:
             args: npm install
       - name: Execute Tests
         env:
-          URL: ${{ env.base_url }}
+          URL: ${{ needs.Build.outputs.url }}
         uses: docker://buildkite/puppeteer:latest
         with:
             args: npm test
